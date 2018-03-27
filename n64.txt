@@ -1,0 +1,152 @@
+1. Select the title of all games
+======================================================================
+SELECT title FROM games;
+
+                  title                   
+------------------------------------------
+ The Legend of Zelda: The Ocarina of Time
+ Super Smash Bros.
+ Super Mario 64
+ Golden Eye 007
+ Mario Kart 64
+ Star Fox 64
+ Perfect Dark
+ Star Wars: Shadow of the Empire
+ Banjo-Kazooie
+ Mario Party
+ Tony Hawk's Pro Skater
+(11 rows)
+
+2. Show all the years in the database.
+======================================================================
+SELECT year FROM games;
+
+ year 
+------
+ 1998
+ 1999
+ 1996
+ 1997
+ 1996
+ 1997
+ 2000
+ 1996
+ 1998
+ 1998
+ 1996
+(11 rows)
+
+3. Show the title of each game made by 'Rare'.
+======================================================================
+SELECT title FROM games WHERE developers = 'Rare';
+
+     title      
+----------------
+ Golden Eye 007
+ Perfect Dark
+ Banjo-Kazooie
+(3 rows)
+
+4. Select all games that were made before 1998.
+======================================================================
+SELECT * FROM games WHERE year < 1998;
+
+ id |              title              | year |  developers  |         genre          
+----+---------------------------------+------+--------------+------------------------
+  3 | Super Mario 64                  | 1996 | Nintendo EAD | Platforming
+  4 | Golden Eye 007                  | 1997 | Rare         | First-Person Shooter
+  5 | Mario Kart 64                   | 1996 | Nintendo EAD | Racing
+  6 | Star Fox 64                     | 1997 | Nintendo EAD | Rail/Scrolling Shooter
+  8 | Star Wars: Shadow of the Empire | 1996 | Lucas Arts   | Action
+ 11 | Tony Hawk's Pro Skater          | 1996 | Neversoft    | Extreme Sports
+(6 rows)
+
+
+5. Find the average release year of all games.
+======================================================================
+SELECT AVG(year) FROM games;
+
+          avg          
+-----------------------
+ 1997.3636363636363636
+(1 row)
+
+6. Show the developer names of each game, in alphabetical order.
+======================================================================
+SELECT title,developers FROM games ORDER BY developers ASC;
+
+                  title                   |   developers   
+------------------------------------------+----------------
+ Super Smash Bros.                        | Hal Laboratory
+ Mario Party                              | Hudson Soft
+ Star Wars: Shadow of the Empire          | Lucas Arts
+ Tony Hawk's Pro Skater                   | Neversoft
+ Star Fox 64                              | Nintendo EAD
+ Super Mario 64                           | Nintendo EAD
+ Mario Kart 64                            | Nintendo EAD
+ The Legend of Zelda: The Ocarina of Time | Nintendo EAD
+ Banjo-Kazooie                            | Rare
+ Perfect Dark                             | Rare
+ Golden Eye 007                           | Rare
+(11 rows)
+
+7. Show the titles of games not made by 'Nintendo EAD'.
+======================================================================
+SELECT title FROM games WHERE NOT developers = 'Nintendo EAD';
+
+title              
+---------------------------------
+ Super Smash Bros.
+ Golden Eye 007
+ Perfect Dark
+ Star Wars: Shadow of the Empire
+ Banjo-Kazooie
+ Mario Party
+ Tony Hawk's Pro Skater
+(7 rows)
+
+8. Add the the game 'F-Zero X', released in 1998, made by 'Nintendo EAD', and with the genre 'Racing'.
+======================================================================
+INSERT INTO Games(title, year, developers, genre) VALUES('F-Zero X', 1998, 'Nintendo EAD', 'Racing');
+
+9. Show all the game titles in descending order of their release year.
+======================================================================
+SELECT title,year FROM games ORDER BY year DESC;
+
+                  title                   | year 
+------------------------------------------+------
+ Perfect Dark                             | 2000
+ Super Smash Bros.                        | 1999
+ F-Zero X                                 | 1998
+ Banjo-Kazooie                            | 1998
+ Mario Party                              | 1998
+ The Legend of Zelda: The Ocarina of Time | 1998
+ Golden Eye 007                           | 1997
+ Star Fox 64                              | 1997
+ Super Mario 64                           | 1996
+ Star Wars: Shadow of the Empire          | 1996
+ Tony Hawk's Pro Skater                   | 1996
+ Mario Kart 64                            | 1996
+(12 rows)
+
+10. Remove all games not made by 'Hudson Soft'.
+======================================================================
+DELETE FROM games WHERE NOT developers='Hudson Soft'; 
+
+11. Show the average release year for games that were made by Rare or have the title Tony Hawk''s Pro Skater in order of their title
+======================================================================
+SELECT AVG(year) FROM games WHERE developers = 'Rare' OR title = 'Tony Hawk''s Pro Skater';
+
+avg          
+-----------------------
+ 1997.7500000000000000
+(1 row)
+
+12. Show the id and title and genre of all games that were either: Made before 1997, Made by Hal Laboratory or have the genre Platforming AND are made by Rare.
+======================================================================
+SELECT id,title,genre FROM games WHERE year<1997 AND developers = 'Hal Laboratory' OR genre = 'Platforming' AND developers = 'Rare';
+
+id |     title     |    genre    
+----+---------------+-------------
+  9 | Banjo-Kazooie | Platforming
+(1 row)
